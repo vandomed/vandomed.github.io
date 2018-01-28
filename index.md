@@ -11,12 +11,12 @@ All are on R-Forge and some are on CRAN. Plan to get them all on GitHub soon.
 
 ## Stock market analysis
 
-I write articles on investment srategies for [Seeking Alpha](https://seekingalpha.com/) - click [here](https://seekingalpha.com/author/dane-van-domelen/articles#articles) to see my articles.
+I write articles on investment srategies for [Seeking Alpha](https://seekingalpha.com/). Click [here](https://seekingalpha.com/author/dane-van-domelen/articles#articles) to see my articles.
 
 ## CV
 
-CV last updated 1/22/18.
+[CV last updated 1/22/18](https://vandomed.github.io/drv_cv_1_28_18.html).
 
 ## Blogs
 
-9/11/17 [Which moving average function in R is fastest?](vandomed.github.io/moving_averages.html)
+9/11/17 [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
