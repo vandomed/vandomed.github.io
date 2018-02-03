@@ -19,5 +19,5 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 ## Blogs
 
-2/3/18 [Create R Package in 5 Minutes with roxygen2](https://vandomed.github.io/build_rpackage.html)
+2/3/18 [Create R Package in 5 Minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
 9/11/17 [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
