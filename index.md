@@ -1,6 +1,6 @@
 ## R packages
 
-All are on R-Forge and some are on CRAN. Plan to get them all on GitHub soon.
+Currently, all are on R-Forge and some are on CRAN. Currently migrating from R-Forge to GitHub. [Here is my GitHub page](https://github.com/vandomed).
 
 [accelerometry](https://cran.r-project.org/web/packages/accelerometry/index.html) <br>
 [nhanesaccel](http://r-forge.r-project.org/R/?group_id=1733) <br>
@@ -15,16 +15,9 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 ## CV
 
-[CV last updated 1/22/18](https://vandomed.github.io/drv_cv_1_28_18.html).
+[Last updated 1/22/18](https://vandomed.github.io/drv_cv_1_28_18.html).
 
 ## Blogs
 
-2/3/18 [Create R Package in 5 Minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
-9/11/17 [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html) <br>
-
-<br>
-
-Date    | Article
---------|----------
-2/3/18  | [Create R Package in 5 Minutes with roxygen2](https://vandomed.github.io/build_rpackage.html)
-9/11/17 | [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
+02/03/18 [Create R Package in 5 Minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
+09/11/17 [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
