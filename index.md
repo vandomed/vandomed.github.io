@@ -11,7 +11,7 @@ Currently, all are on R-Forge and some are on CRAN. Currently migrating from R-F
 
 ## Stock market analysis
 
-I write articles on investment srategies for [Seeking Alpha](https://seekingalpha.com/). Click [here](https://seekingalpha.com/author/dane-van-domelen/articles#articles) to see my articles.
+I write articles on investment srategies for [Seeking Alpha](https://seekingalpha.com/). [Here are my articles](https://seekingalpha.com/author/dane-van-domelen/articles#articles).
 
 ## CV
 
