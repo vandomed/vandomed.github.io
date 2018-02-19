@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Dane Van Domelen" />
+
+<meta name="date" content="2018-02-19" />
+
+<title>Summary Tables with tab</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Summary Tables with ‘tab’</h1>
+<h4 class="author"><em>Dane Van Domelen</em></h4>
+<h4 class="date"><em>2018-02-19</em></h4>
+
+
+
+<div id="tab-package" class="section level2">
+<h2>‘tab’ package</h2>
+<p>The purpose of <strong>tab</strong> is to make it easier to create tables for papers, including Table 1’s showing characteristics of the sample and summary tables for fitted regression models. Currently, the following functions are included:</p>
+<ul>
+<li><code>tabmeans</code> compares means in two or more groups.</li>
+<li><code>tabmedians</code> compares medians in two or more groups.</li>
+<li><code>tabfreq</code> compares frequencies in two or more groups.</li>
+<li><code>tabmulti</code> compares multiple variables in two or more groups.</li>
+<li><code>tabglm</code> summarizes a generalized linear model (GLM) fit via <code>glm</code>.</li>
+<li><code>tabgee</code> summarizes a generalized estimating equation (GEE) fit via <code>gee</code>.</li>
+<li><code>tabcox</code> summarizes a Cox Proportional Hazards (Cox PH) model fit via <code>coxph</code> in <strong>survival</strong>.</li>
+</ul>
+</div>
+<div id="creating-a-table-1" class="section level2">
+<h2>Creating a Table 1</h2>
+<p>A toy dataset called <code>tabdata</code> is included in the <strong>tab package</strong>. It is a data frame with 15 variables and 300 observations. Let’s take a look:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;tab&quot;</span>)
+<span class="kw">data</span>(tabdata)
+<span class="kw">dim</span>(tabdata)
+<span class="co">#&gt; [1] 300  15</span>
+<span class="kw">head</span>(tabdata)
+<span class="co">#&gt;   ID     Group Age    Sex  Race  BMI time delta death_1yr  bp.1  bp.2</span>
+<span class="co">#&gt; 1  1   Control  63 Female Black 28.6 1512     1         0 121.4 123.4</span>
+<span class="co">#&gt; 2  2 Treatment  74 Female White 27.2 2987     1         0 145.5 168.9</span>
+<span class="co">#&gt; 3  3 Treatment  70   Male Black 25.5 1468     0         0 138.4 134.6</span>
+<span class="co">#&gt; 4  4 Treatment  78   Male Other 24.3  691     1         0 128.3 124.2</span>
+<span class="co">#&gt; 5  5 Treatment  73   Male White 25.8  477     1         0 163.3 133.2</span>
+<span class="co">#&gt; 6  6   Control  61 Female White 21.9 3380     1         0 137.6 130.3</span>
+<span class="co">#&gt;    bp.3 highbp.1 highbp.2 highbp.3</span>
+<span class="co">#&gt; 1 118.3        0        0        0</span>
+<span class="co">#&gt; 2 149.5        1        1        1</span>
+<span class="co">#&gt; 3 131.2        0        0        0</span>
+<span class="co">#&gt; 4 131.1        0        0        0</span>
+<span class="co">#&gt; 5 138.4        1        0        0</span>
+<span class="co">#&gt; 6 141.5        0        0        1</span></code></pre></div>
+<p>Here is how you can use <code>tabmulti</code> to generate a Table 1 comparing characteristics of the treatment and control groups.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table1 &lt;-<span class="st"> </span><span class="kw">tabmulti</span>(<span class="dt">data =</span> tabdata, 
+                    <span class="dt">xvarname =</span> <span class="st">&quot;Group&quot;</span>, 
+                    <span class="dt">yvarnames =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Sex&quot;</span>, <span class="st">&quot;Race&quot;</span>)))
+<span class="co">#&gt;       Variable             Control      Treatment    P       </span>
+<span class="co">#&gt;  [1,] &quot;Age, M (SD)&quot;        &quot;70.5 (5.3)&quot; &quot;69.5 (5.9)&quot; &quot;0.15&quot;  </span>
+<span class="co">#&gt;  [2,] &quot;Sex, n (%)&quot;         &quot;&quot;           &quot;&quot;           &quot;&lt;0.001&quot;</span>
+<span class="co">#&gt;  [3,] &quot;  Female&quot;           &quot;93 (68.4)&quot;  &quot;62 (38.5)&quot;  &quot;&quot;      </span>
+<span class="co">#&gt;  [4,] &quot;  Male&quot;             &quot;43 (31.6)&quot;  &quot;99 (61.5)&quot;  &quot;&quot;      </span>
+<span class="co">#&gt;  [5,] &quot;Race, n (%)&quot;        &quot;&quot;           &quot;&quot;           &quot;0.29&quot;  </span>
+<span class="co">#&gt;  [6,] &quot;  White&quot;            &quot;46 (34.1)&quot;  &quot;65 (39.6)&quot;  &quot;&quot;      </span>
+<span class="co">#&gt;  [7,] &quot;  Black&quot;            &quot;36 (26.7)&quot;  &quot;52 (31.7)&quot;  &quot;&quot;      </span>
+<span class="co">#&gt;  [8,] &quot;  Mexican American&quot; &quot;21 (15.6)&quot;  &quot;19 (11.6)&quot;  &quot;&quot;      </span>
+<span class="co">#&gt;  [9,] &quot;  Other&quot;            &quot;32 (23.7)&quot;  &quot;28 (17.1)&quot;  &quot;&quot;</span></code></pre></div>
+<p><code>tabmulti</code> created a character matrix, but it doesn’t look like a table yet. If you want to get the table into Word, here are two approaches:</p>
+<ol style="list-style-type: decimal">
+<li><p>Install/load <strong>Kmisc</strong> and run <code>write.cb(table1)</code> to copy the table to your clipboard. Paste the result into Word, then highlight the text and go to <code>Insert -&gt; Table -&gt; Convert Text to Table... OK</code>.</p></li>
+<li><p>Add <code>print.html = TRUE</code> to the above <code>tabmulti</code> function call. That will result in a .html file being written to your working directory. It should appear as a neat table when you open it (e.g. in Google Chrome), and you can copy/paste it into Word.</p></li>
+</ol>
+<p>If you want it to display it in a <strong>knitr</strong> document, you can add <code>latex = TRUE</code> and then use various approaches…</p>
+<div id="printr-kable-for-options" class="section level3">
+<h3>‘printr’ (‘kable’ for options)</h3>
+<p>I think the easiest approach is to simply load the <strong>printr</strong> package. Loading it results in R output printing more neatly, which includes character matrices showing up as neat tables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;printr&quot;</span>)
+(table1 &lt;-<span class="st"> </span><span class="kw">tabmulti</span>(<span class="dt">data =</span> tabdata, 
+                    <span class="dt">xvarname =</span> <span class="st">&quot;Group&quot;</span>, 
+                    <span class="dt">yvarnames =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Sex&quot;</span>, <span class="st">&quot;Race&quot;</span>), 
+                    <span class="dt">latex =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Control</th>
+<th align="left">Treatment</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Age, M (SD)</td>
+<td align="left">70.5 (5.3)</td>
+<td align="left">69.5 (5.9)</td>
+<td align="left">0.15</td>
+</tr>
+<tr class="even">
+<td align="left">Sex, n (%)</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Female</td>
+<td align="left">93 (68.4)</td>
+<td align="left">62 (38.5)</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Male</td>
+<td align="left">43 (31.6)</td>
+<td align="left">99 (61.5)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Race, n (%)</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">0.29</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White</td>
+<td align="left">46 (34.1)</td>
+<td align="left">65 (39.6)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="left">36 (26.7)</td>
+<td align="left">52 (31.7)</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="left">21 (15.6)</td>
+<td align="left">19 (11.6)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="left">32 (23.7)</td>
+<td align="left">28 (17.1)</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(<span class="st">&quot;package:printr&quot;</span>, <span class="dt">unload =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>(I detached <strong>printr</strong> so R reverts to its usual output display format for the rest of the vignette.)</p>
+<p>If you want to add table options, e.g. a caption or non-default column alignment, you can use <code>kable</code> from the <strong>knitr</strong> package (e.g. try <code>kable(table1, align = &quot;lrrr&quot;, caption = &quot;Table 1.&quot;)</code>.</p>
+</div>
+<div id="kable" class="section level3">
+<h3>‘kable’</h3>
+<p><strong>knitr</strong>’s <code>kable</code> function works nicely:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)
+<span class="kw">kable</span>(table1,
+      <span class="dt">caption =</span> <span class="st">&quot;Table 1a. Characteristics (created by `tabmulti`/`kable`).&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrrr'</span>)</code></pre></div>
+<table>
+<caption>Table 1a. Characteristics (created by <code>tabmulti</code>/<code>kable</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Control</th>
+<th align="right">Treatment</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Age, M (SD)</td>
+<td align="right">70.5 (5.3)</td>
+<td align="right">69.5 (5.9)</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="even">
+<td align="left">Sex, n (%)</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Female</td>
+<td align="right">93 (68.4)</td>
+<td align="right">62 (38.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Male</td>
+<td align="right">43 (31.6)</td>
+<td align="right">99 (61.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">Race, n (%)</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.29</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White</td>
+<td align="right">46 (34.1)</td>
+<td align="right">65 (39.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right">36 (26.7)</td>
+<td align="right">52 (31.7)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right">21 (15.6)</td>
+<td align="right">19 (11.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right">32 (23.7)</td>
+<td align="right">28 (17.1)</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="xtable" class="section level3">
+<h3>‘xtable’</h3>
+<p>Another option is the <strong>xtable</strong> package/function (requires adding <code>results = &quot;asis&quot;</code> as a chunk option!):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;xtable&quot;</span>)
+<span class="kw">print</span>(<span class="kw">xtable</span>(table1, 
+             <span class="dt">caption =</span> <span class="st">&quot;Table 1b. Characteristics (created by `tabmulti`/`xtable`).&quot;</span>, 
+             <span class="dt">align =</span> <span class="st">'llrrr'</span>,), 
+      <span class="dt">type =</span> <span class="st">&quot;html&quot;</span>, 
+      <span class="dt">include.rownames =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<table border="1">
+<caption align="top">
+Table 1b. Characteristics (created by <code>tabmulti</code>/<code>xtable</code>).
+</caption>
+<tr>
+<th>
+Variable
+</th>
+<th>
+Control
+</th>
+<th>
+Treatment
+</th>
+<th>
+P
+</th>
+</tr>
+<tr>
+<td>
+Age, M (SD)
+</td>
+<td align="right">
+70.5 (5.3)
+</td>
+<td align="right">
+69.5 (5.9)
+</td>
+<td align="right">
+0.15
+</td>
+</tr>
+<tr>
+<td>
+Sex, n (%)
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+<td align="right">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\hskip .4cm\)</span>Female
+</td>
+<td align="right">
+93 (68.4)
+</td>
+<td align="right">
+62 (38.5)
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\hskip .4cm\)</span>Male
+</td>
+<td align="right">
+43 (31.6)
+</td>
+<td align="right">
+99 (61.5)
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td>
+Race, n (%)
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+<td align="right">
+0.29
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\hskip .4cm\)</span>White
+</td>
+<td align="right">
+46 (34.1)
+</td>
+<td align="right">
+65 (39.6)
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\hskip .4cm\)</span>Black
+</td>
+<td align="right">
+36 (26.7)
+</td>
+<td align="right">
+52 (31.7)
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\hskip .4cm\)</span>Mexican American
+</td>
+<td align="right">
+21 (15.6)
+</td>
+<td align="right">
+19 (11.6)
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\hskip .4cm\)</span>Other
+</td>
+<td align="right">
+32 (23.7)
+</td>
+<td align="right">
+28 (17.1)
+</td>
+<td align="right">
+</td>
+</tr>
+</table>
+</div>
+<div id="pandoc.table" class="section level3">
+<h3>‘pandoc.table’</h3>
+<p>And finally the <code>pandoc.table</code> function in <strong>pander</strong> (also requires <code>results = &quot;asis&quot;</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;pander&quot;</span>)
+<span class="kw">pandoc.table</span>(table1, 
+             <span class="dt">caption =</span> <span class="st">&quot;Table 1c. Characteristics (created by `tabmulti`/`pandoc.table`).&quot;</span>, 
+             <span class="dt">style =</span> <span class="st">&quot;rmarkdown&quot;</span>, 
+             <span class="dt">justify =</span> <span class="st">'lrrr'</span>, 
+             <span class="dt">split.tables =</span> <span class="ot">Inf</span>)</code></pre></div>
+<table>
+<caption>Table 1c. Characteristics (created by <code>tabmulti</code>/<code>pandoc.table</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Control</th>
+<th align="right">Treatment</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Age, M (SD)</td>
+<td align="right">70.5 (5.3)</td>
+<td align="right">69.5 (5.9)</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="even">
+<td align="left">Sex, n (%)</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Female</td>
+<td align="right">93 (68.4)</td>
+<td align="right">62 (38.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Male</td>
+<td align="right">43 (31.6)</td>
+<td align="right">99 (61.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">Race, n (%)</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.29</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White</td>
+<td align="right">46 (34.1)</td>
+<td align="right">65 (39.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right">36 (26.7)</td>
+<td align="right">52 (31.7)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right">21 (15.6)</td>
+<td align="right">19 (11.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right">32 (23.7)</td>
+<td align="right">28 (17.1)</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="more-on-tabmulti" class="section level2">
+<h2>More on ‘tabmulti’</h2>
+<p>Recall the <code>tabmulti</code> function call from above:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table1 &lt;-<span class="st"> </span><span class="kw">tabmulti</span>(<span class="dt">data =</span> tabdata, 
+                   <span class="dt">xvarname =</span> <span class="st">&quot;Group&quot;</span>, 
+                   <span class="dt">yvarnames =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Sex&quot;</span>, <span class="st">&quot;Race&quot;</span>), 
+                   <span class="dt">latex =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>I specified the data frame, the name of the group variable, and the names of the variables I wanted to compare. By default, <code>tabmulti</code> treats each Y variable as continuous if it is numeric and takes on 5 or more unique values, and categorical otherwise. It compares means for continuous variables and frequencies for categorical variables.</p>
+<p>Internally, <code>tabmulti</code> called <code>tabmeans</code> for the first comparison and <code>tabfreq</code> for the second and third. We could have created the same table using these functions and <code>rbind</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table1b &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">tabmeans</span>(<span class="dt">x =</span> tabdata<span class="op">$</span>Group, <span class="dt">y =</span> tabdata<span class="op">$</span>Age, <span class="dt">latex =</span> <span class="ot">TRUE</span>), 
+                 <span class="kw">tabfreq</span>(<span class="dt">x =</span> tabdata<span class="op">$</span>Group, <span class="dt">y =</span> tabdata<span class="op">$</span>Sex, <span class="dt">latex =</span> <span class="ot">TRUE</span>), 
+                 <span class="kw">tabfreq</span>(<span class="dt">x =</span> tabdata<span class="op">$</span>Group, <span class="dt">y =</span> tabdata<span class="op">$</span>Race, <span class="dt">latex =</span> <span class="ot">TRUE</span>))
+<span class="kw">all</span>(table1 <span class="op">==</span><span class="st"> </span>table1b)
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<p>Let’s go through some more options. The <code>columns</code> input controls what columns are shown, with the default <code>columns = c(&quot;xgroups&quot;, &quot;p&quot;)</code> requesting a column for each <code>x</code> level and the p-value (from t-test or ANOVA). Since we have missing values and <code>tabmulti</code> uses pairwise deletion by default, let’s add a sample size column, and why not also throw in a column for the overall sample statistics.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table1 &lt;-<span class="st"> </span><span class="kw">tabmulti</span>(<span class="dt">data =</span> tabdata, 
+                   <span class="dt">xvarname =</span> <span class="st">&quot;Group&quot;</span>, 
+                   <span class="dt">yvarnames =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Sex&quot;</span>, <span class="st">&quot;Race&quot;</span>),
+                   <span class="dt">columns =</span> <span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;overall&quot;</span>, <span class="st">&quot;xgroups&quot;</span>, <span class="st">&quot;p&quot;</span>),
+                   <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="kw">kable</span>(table1, 
+      <span class="dt">caption =</span> <span class="st">&quot;Table 1d. Characteristics of sample.&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrrrrr'</span>)</code></pre></div>
+<table>
+<caption>Table 1d. Characteristics of sample.</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">N</th>
+<th align="right">Overall</th>
+<th align="right">Control</th>
+<th align="right">Treatment</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Age, M (SD)</td>
+<td align="right">296</td>
+<td align="right">69.9 (5.7)</td>
+<td align="right">70.5 (5.3)</td>
+<td align="right">69.5 (5.9)</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="even">
+<td align="left">Sex, n (%)</td>
+<td align="right">297</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Female</td>
+<td align="right"></td>
+<td align="right">155 (52.2)</td>
+<td align="right">93 (68.4)</td>
+<td align="right">62 (38.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Male</td>
+<td align="right"></td>
+<td align="right">142 (47.8)</td>
+<td align="right">43 (31.6)</td>
+<td align="right">99 (61.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">Race, n (%)</td>
+<td align="right">299</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.29</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White</td>
+<td align="right"></td>
+<td align="right">111 (37.1)</td>
+<td align="right">46 (34.1)</td>
+<td align="right">65 (39.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right"></td>
+<td align="right">88 (29.4)</td>
+<td align="right">36 (26.7)</td>
+<td align="right">52 (31.7)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right"></td>
+<td align="right">40 (13.4)</td>
+<td align="right">21 (15.6)</td>
+<td align="right">19 (11.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right"></td>
+<td align="right">60 (20.1)</td>
+<td align="right">32 (23.7)</td>
+<td align="right">28 (17.1)</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>For age, often the range is more informative than the SD. We can display M (min-max) rather than M (SD) but setting the <code>tabmeans</code> input <code>parenth = &quot;sd&quot;</code>. To pass this argument through <code>tabmulti</code>, we use the <code>means.list</code> argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table1 &lt;-<span class="st"> </span><span class="kw">tabmulti</span>(<span class="dt">data =</span> tabdata, 
+                   <span class="dt">xvarname =</span> <span class="st">&quot;Group&quot;</span>, 
+                   <span class="dt">yvarnames =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Sex&quot;</span>, <span class="st">&quot;Race&quot;</span>),
+                   <span class="dt">columns =</span> <span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;overall&quot;</span>, <span class="st">&quot;xgroups&quot;</span>, <span class="st">&quot;p&quot;</span>),
+                   <span class="dt">means.list =</span> <span class="kw">list</span>(<span class="dt">parenth =</span> <span class="st">&quot;minmax&quot;</span>),
+                   <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="kw">kable</span>(table1, 
+      <span class="dt">caption =</span> <span class="st">&quot;Table 1e. Characteristics of sample.&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrrrrr'</span>)</code></pre></div>
+<table>
+<caption>Table 1e. Characteristics of sample.</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">N</th>
+<th align="right">Overall</th>
+<th align="right">Control</th>
+<th align="right">Treatment</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Age, M (min, max)</td>
+<td align="right">296</td>
+<td align="right">69.9 (60, 80)</td>
+<td align="right">70.5 (60, 79)</td>
+<td align="right">69.5 (60, 80)</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="even">
+<td align="left">Sex, n (%)</td>
+<td align="right">297</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Female</td>
+<td align="right"></td>
+<td align="right">155 (52.2)</td>
+<td align="right">93 (68.4)</td>
+<td align="right">62 (38.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Male</td>
+<td align="right"></td>
+<td align="right">142 (47.8)</td>
+<td align="right">43 (31.6)</td>
+<td align="right">99 (61.5)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">Race, n (%)</td>
+<td align="right">299</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.29</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White</td>
+<td align="right"></td>
+<td align="right">111 (37.1)</td>
+<td align="right">46 (34.1)</td>
+<td align="right">65 (39.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right"></td>
+<td align="right">88 (29.4)</td>
+<td align="right">36 (26.7)</td>
+<td align="right">52 (31.7)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right"></td>
+<td align="right">40 (13.4)</td>
+<td align="right">21 (15.6)</td>
+<td align="right">19 (11.6)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right"></td>
+<td align="right">60 (20.1)</td>
+<td align="right">32 (23.7)</td>
+<td align="right">28 (17.1)</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Technically the range is the difference between the min and the max, not the min and the max, but if you prefer the label <code>&quot;M (range)&quot;</code>, you could specify the <code>text.label</code> input: <code>means.list = list(parenth = &quot;minmax&quot;, text.label = &quot;M (range)&quot;)</code>.</p>
+<p>These are some of the options you have access to with <code>tabmulti</code> and the underlying functions it calls. A complete list of options are described in the help files for <code>tabmulti</code>, <code>tabmeans</code>, <code>tabmedians</code>, and <code>tabfreq</code>. The help files also have some different examples.</p>
+</div>
+<div id="regression-summaries" class="section level2">
+<h2>Regression summaries</h2>
+<div id="linear-regression" class="section level3">
+<h3>Linear regression</h3>
+<p>Suppose we want to summarize a linear regression of BMI on age, sex, race, and treatment group. You could use <code>kable</code>, <code>xtable</code>, or <code>pandoc.table</code> to print a summary table like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">glm</span>(BMI <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Race <span class="op">+</span><span class="st"> </span>Group, <span class="dt">data =</span> tabdata)
+<span class="kw">print</span>(<span class="kw">xtable</span>(fit, 
+             <span class="dt">caption =</span> <span class="st">&quot;Table 2a. Linear regression fit (created by `xtable`).&quot;</span>), 
+      <span class="dt">type =</span> <span class="st">&quot;html&quot;</span>)</code></pre></div>
+<table border="1">
+<caption align="top">
+Table 2a. Linear regression fit (created by <code>xtable</code>).
+</caption>
+<tr>
+<th>
+</th>
+<th>
+Estimate
+</th>
+<th>
+Std. Error
+</th>
+<th>
+t value
+</th>
+<th>
+Pr(&gt;|t|)
+</th>
+</tr>
+<tr>
+<td align="right">
+(Intercept)
+</td>
+<td align="right">
+22.1009
+</td>
+<td align="right">
+1.6340
+</td>
+<td align="right">
+13.53
+</td>
+<td align="right">
+0.0000
+</td>
+</tr>
+<tr>
+<td align="right">
+Age
+</td>
+<td align="right">
+0.0102
+</td>
+<td align="right">
+0.0231
+</td>
+<td align="right">
+0.44
+</td>
+<td align="right">
+0.6591
+</td>
+</tr>
+<tr>
+<td align="right">
+SexMale
+</td>
+<td align="right">
+-0.1800
+</td>
+<td align="right">
+0.2723
+</td>
+<td align="right">
+-0.66
+</td>
+<td align="right">
+0.5090
+</td>
+</tr>
+<tr>
+<td align="right">
+RaceBlack
+</td>
+<td align="right">
+0.3362
+</td>
+<td align="right">
+0.3183
+</td>
+<td align="right">
+1.06
+</td>
+<td align="right">
+0.2918
+</td>
+</tr>
+<tr>
+<td align="right">
+RaceMexican American
+</td>
+<td align="right">
+0.6283
+</td>
+<td align="right">
+0.4204
+</td>
+<td align="right">
+1.49
+</td>
+<td align="right">
+0.1361
+</td>
+</tr>
+<tr>
+<td align="right">
+RaceOther
+</td>
+<td align="right">
+0.0204
+</td>
+<td align="right">
+0.3613
+</td>
+<td align="right">
+0.06
+</td>
+<td align="right">
+0.9550
+</td>
+</tr>
+<tr>
+<td align="right">
+GroupTreatment
+</td>
+<td align="right">
+3.0966
+</td>
+<td align="right">
+0.2755
+</td>
+<td align="right">
+11.24
+</td>
+<td align="right">
+0.0000
+</td>
+</tr>
+</table>
+<p>But this isn’t how a regression table in a paper typically looks. A few issues:</p>
+<ul>
+<li>P-value column should have a simpler heading.</li>
+<li>P-values should not print as 0.</li>
+<li>For factor variables, levels should be printed more cleanly.</li>
+</ul>
+<p>Let’s try <code>tabglm</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table2 &lt;-<span class="st"> </span><span class="kw">tabglm</span>(<span class="dt">fit =</span> fit, 
+                 <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="kw">kable</span>(table2, 
+      <span class="dt">caption =</span> <span class="st">&quot;Table 2b. Linear regression fit (created by `tabglm` and `kable`).&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrr'</span>)</code></pre></div>
+<table>
+<caption>Table 2b. Linear regression fit (created by <code>tabglm</code> and <code>kable</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Beta (SE)</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Intercept</td>
+<td align="right">22.10 (1.63)</td>
+<td align="right">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="right">0.01 (0.02)</td>
+<td align="right">0.66</td>
+</tr>
+<tr class="odd">
+<td align="left">Sex</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Female (ref)</td>
+<td align="right">–</td>
+<td align="right">–</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Male</td>
+<td align="right">-0.18 (0.27)</td>
+<td align="right">0.51</td>
+</tr>
+<tr class="even">
+<td align="left">Race</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White (ref)</td>
+<td align="right">–</td>
+<td align="right">–</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right">0.34 (0.32)</td>
+<td align="right">0.29</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right">0.63 (0.42)</td>
+<td align="right">0.14</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right">0.02 (0.36)</td>
+<td align="right">0.95</td>
+</tr>
+<tr class="odd">
+<td align="left">Group</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Control (ref)</td>
+<td align="right">–</td>
+<td align="right">–</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Treatment</td>
+<td align="right">3.10 (0.28)</td>
+<td align="right">&lt;0.001</td>
+</tr>
+</tbody>
+</table>
+<p>If you don’t like all the white space, you can set <code>compress.factors = TRUE</code> to omit rows with factor variable names (and left-align factor levels). By default, the input <code>omit.refgroups</code> has the same value as <code>compress.factors</code>, and <code>omit.refgroups = TRUE</code> omits reference group rows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table2 &lt;-<span class="st"> </span><span class="kw">tabglm</span>(<span class="dt">fit =</span> fit, 
+                 <span class="dt">compress.factors =</span> <span class="ot">TRUE</span>,
+                 <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="kw">kable</span>(table2, 
+      <span class="dt">caption =</span> <span class="st">&quot;Table 2c. Linear regression fit (created by `tabglm` and `kable`).&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrr'</span>)</code></pre></div>
+<table>
+<caption>Table 2c. Linear regression fit (created by <code>tabglm</code> and <code>kable</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Beta (SE)</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Intercept</td>
+<td align="right">22.10 (1.63)</td>
+<td align="right">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="right">0.01 (0.02)</td>
+<td align="right">0.66</td>
+</tr>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="right">-0.18 (0.27)</td>
+<td align="right">0.51</td>
+</tr>
+<tr class="even">
+<td align="left">Black</td>
+<td align="right">0.34 (0.32)</td>
+<td align="right">0.29</td>
+</tr>
+<tr class="odd">
+<td align="left">Mexican American</td>
+<td align="right">0.63 (0.42)</td>
+<td align="right">0.14</td>
+</tr>
+<tr class="even">
+<td align="left">Other</td>
+<td align="right">0.02 (0.36)</td>
+<td align="right">0.95</td>
+</tr>
+<tr class="odd">
+<td align="left">Treatment</td>
+<td align="right">3.10 (0.28)</td>
+<td align="right">&lt;0.001</td>
+</tr>
+</tbody>
+</table>
+<p>Maybe you’re submitting to one of those enlightened journals that thinks comparing confidence intervals to 0 is totally different than comparing p-values to 0.05. <code>tabglm</code> can do confidence intervals.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table2 &lt;-<span class="st"> </span><span class="kw">tabglm</span>(<span class="dt">fit =</span> fit, 
+                 <span class="dt">columns =</span> <span class="kw">c</span>(<span class="st">&quot;beta.se&quot;</span>, <span class="st">&quot;betaci&quot;</span>),
+                 <span class="dt">compress.factors =</span> <span class="ot">TRUE</span>,
+                 <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; Waiting for profiling to be done...</span>
+<span class="kw">kable</span>(table2, 
+      <span class="dt">caption =</span> <span class="st">&quot;Table 2d. Linear regression fit (created by `tabglm` and `kable`).&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrr'</span>)</code></pre></div>
+<table>
+<caption>Table 2d. Linear regression fit (created by <code>tabglm</code> and <code>kable</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Beta (SE)</th>
+<th align="right">95% CI for Beta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Intercept</td>
+<td align="right">22.10 (1.63)</td>
+<td align="right">18.90, 25.30</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="right">0.01 (0.02)</td>
+<td align="right">-0.04, 0.06</td>
+</tr>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="right">-0.18 (0.27)</td>
+<td align="right">-0.71, 0.35</td>
+</tr>
+<tr class="even">
+<td align="left">Black</td>
+<td align="right">0.34 (0.32)</td>
+<td align="right">-0.29, 0.96</td>
+</tr>
+<tr class="odd">
+<td align="left">Mexican American</td>
+<td align="right">0.63 (0.42)</td>
+<td align="right">-0.20, 1.45</td>
+</tr>
+<tr class="even">
+<td align="left">Other</td>
+<td align="right">0.02 (0.36)</td>
+<td align="right">-0.69, 0.73</td>
+</tr>
+<tr class="odd">
+<td align="left">Treatment</td>
+<td align="right">3.10 (0.28)</td>
+<td align="right">2.56, 3.64</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="logistic-regression" class="section level3">
+<h3>Logistic regression</h3>
+<p>Summarizing a fitted logistic regression model with <code>tabglm</code> is very similar. For 1-year mortality vs. age, age squared, sex, race, and treatment group:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">glm</span>(death_1yr <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(Age, <span class="dv">2</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Race <span class="op">+</span><span class="st"> </span>Group, 
+           <span class="dt">data =</span> tabdata, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+table3 &lt;-<span class="st"> </span><span class="kw">tabglm</span>(<span class="dt">fit =</span> fit, 
+                 <span class="dt">compress.factors =</span> <span class="st">&quot;binary&quot;</span>, 
+                 <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; Waiting for profiling to be done...</span>
+<span class="kw">kable</span>(table3, 
+      <span class="dt">caption =</span> <span class="st">&quot;Table 3. Logistic regression fit (created by `tabglm` and `kable`).&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrrr'</span>)</code></pre></div>
+<table>
+<caption>Table 3. Logistic regression fit (created by <code>tabglm</code> and <code>kable</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Beta (SE)</th>
+<th align="right">OR (95% CI)</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Intercept</td>
+<td align="right">-20.28 (25.57)</td>
+<td align="right">–</td>
+<td align="right">0.43</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="right">0.54 (0.73)</td>
+<td align="right">1.72 (0.42, 7.43)</td>
+<td align="right">0.46</td>
+</tr>
+<tr class="odd">
+<td align="left">Age squared</td>
+<td align="right">-0.00 (0.01)</td>
+<td align="right">1.00 (0.99, 1.01)</td>
+<td align="right">0.48</td>
+</tr>
+<tr class="even">
+<td align="left">Male</td>
+<td align="right">0.14 (0.29)</td>
+<td align="right">1.15 (0.64, 2.05)</td>
+<td align="right">0.64</td>
+</tr>
+<tr class="odd">
+<td align="left">Race</td>
+<td align="right"></td>
+<td align="right">–</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White (ref)</td>
+<td align="right">–</td>
+<td align="right">–</td>
+<td align="right">–</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right">-0.92 (0.38)</td>
+<td align="right">0.40 (0.19, 0.83)</td>
+<td align="right">0.02</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right">0.16 (0.42)</td>
+<td align="right">1.17 (0.50, 2.68)</td>
+<td align="right">0.70</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right">0.04 (0.37)</td>
+<td align="right">1.04 (0.50, 2.16)</td>
+<td align="right">0.91</td>
+</tr>
+<tr class="even">
+<td align="left">Treatment</td>
+<td align="right">0.04 (0.30)</td>
+<td align="right">1.04 (0.58, 1.89)</td>
+<td align="right">0.89</td>
+</tr>
+</tbody>
+</table>
+<p>Notice that the second-order term was labeled appropriately, and <code>tabglm</code> recognized <code>fit</code> as a logistic regression and thus by default added a OR (95% CI) column. Additionally, the binary Sex and Group variables was displayed as single rows, while the other factor variable, Race, was shown in a more expanded format. This was the result of setting <code>compress.factors = &quot;binary&quot;</code> (<code>compress.factors</code> can be <code>TRUE</code>, <code>FALSE</code>, or <code>&quot;binary&quot;</code>).</p>
+</div>
+<div id="gees" class="section level3">
+<h3>GEEs</h3>
+<p>To summarize a fitted GEE, we can convert <code>tabdata</code> from wide to long format, fit a GEE, and then call <code>tabgee</code>. Here’s a table for blood pressure vs. age, sex, race, BMI, and treatment group, with columns for Beta, SE, Z, and P:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tabdata2 &lt;-<span class="st"> </span><span class="kw">reshape</span>(<span class="dt">data =</span> tabdata,
+                    <span class="dt">varying =</span> <span class="kw">c</span>(<span class="st">&quot;bp.1&quot;</span>, <span class="st">&quot;bp.2&quot;</span>, <span class="st">&quot;bp.3&quot;</span>, <span class="st">&quot;highbp.1&quot;</span>,
+                                <span class="st">&quot;highbp.2&quot;</span>, <span class="st">&quot;highbp.3&quot;</span>),
+                    <span class="dt">timevar =</span> <span class="st">&quot;bp.visit&quot;</span>, 
+                    <span class="dt">direction =</span> <span class="st">&quot;long&quot;</span>)
+tabdata2 &lt;-<span class="st"> </span>tabdata2[<span class="kw">order</span>(tabdata2<span class="op">$</span>id), ]
+fit &lt;-<span class="st"> </span><span class="kw">gee</span>(bp <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Race <span class="op">+</span><span class="st"> </span>BMI <span class="op">+</span><span class="st"> </span>Group, 
+           <span class="dt">id =</span> id, 
+           <span class="dt">data =</span> tabdata2,
+           <span class="dt">corstr =</span> <span class="st">&quot;unstructured&quot;</span>)
+<span class="co">#&gt;          (Intercept)                  Age              SexMale </span>
+<span class="co">#&gt;         111.89775246           0.04056654           4.16389689 </span>
+<span class="co">#&gt;            RaceBlack RaceMexican American            RaceOther </span>
+<span class="co">#&gt;           0.15475299           1.16832912           0.01975425 </span>
+<span class="co">#&gt;                  BMI       GroupTreatment </span>
+<span class="co">#&gt;           0.63487889           3.65538664</span>
+table4 &lt;-<span class="st"> </span><span class="kw">tabgee</span>(<span class="dt">fit =</span> fit, 
+                 <span class="dt">columns =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;se&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;p&quot;</span>),
+                 <span class="dt">compress.factors =</span> <span class="st">&quot;binary&quot;</span>, 
+                 <span class="dt">data =</span> tabdata2, 
+                 <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="kw">kable</span>(table4, 
+      <span class="dt">caption =</span> <span class="st">&quot;Table 4. Cox PH fit (created by `tabgee` and `kable`).&quot;</span>, 
+      <span class="dt">align =</span> <span class="st">'lrrr'</span>)</code></pre></div>
+<table>
+<caption>Table 4. Cox PH fit (created by <code>tabgee</code> and <code>kable</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Beta</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Intercept</td>
+<td align="right">111.71</td>
+<td align="right">5.45</td>
+<td align="right">20.50</td>
+<td align="left">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="right">0.04</td>
+<td align="right">0.07</td>
+<td align="right">0.65</td>
+<td align="left">0.51</td>
+</tr>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="right">4.16</td>
+<td align="right">0.75</td>
+<td align="right">5.54</td>
+<td align="left">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Race</td>
+<td align="right"></td>
+<td align="right">-</td>
+<td align="right">-</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White (ref)</td>
+<td align="right">-</td>
+<td align="right">-</td>
+<td align="right">-</td>
+<td align="left">-</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right">0.19</td>
+<td align="right">0.87</td>
+<td align="right">0.22</td>
+<td align="left">0.83</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right">1.13</td>
+<td align="right">1.27</td>
+<td align="right">0.89</td>
+<td align="left">0.37</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right">0.03</td>
+<td align="right">1.09</td>
+<td align="right">0.03</td>
+<td align="left">0.98</td>
+</tr>
+<tr class="odd">
+<td align="left">BMI</td>
+<td align="right">0.64</td>
+<td align="right">0.16</td>
+<td align="right">3.87</td>
+<td align="left">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Treatment</td>
+<td align="right">3.65</td>
+<td align="right">0.98</td>
+<td align="right">3.71</td>
+<td align="left">&lt;0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="cox-ph" class="section level3">
+<h3>Cox PH</h3>
+<p>And finally, to summarize a fitted Cox PH model for survival vs. covariates, with default settings:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tabdata &lt;-<span class="st"> </span>tabdata[<span class="kw">complete.cases</span>(tabdata), ]
+fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(<span class="dt">time =</span> tabdata<span class="op">$</span>time, <span class="dt">event =</span> tabdata<span class="op">$</span>delta) <span class="op">~</span><span class="st"> </span>
+<span class="st">               </span>Age <span class="op">+</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Race <span class="op">+</span><span class="st"> </span>Group, 
+             <span class="dt">data =</span> tabdata)
+table5 &lt;-<span class="st"> </span><span class="kw">tabcox</span>(<span class="dt">fit =</span> fit, 
+                 <span class="dt">latex =</span> <span class="ot">TRUE</span>)
+<span class="kw">kable</span>(table5, <span class="dt">caption =</span> <span class="st">&quot;Table 5. Cox PH fit (created by `tabcox` and `kable`).&quot;</span>, <span class="dt">align =</span> <span class="st">'lrrr'</span>)</code></pre></div>
+<table>
+<caption>Table 5. Cox PH fit (created by <code>tabcox</code> and <code>kable</code>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Beta (SE)</th>
+<th align="right">HR (95% CI)</th>
+<th align="right">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Age</td>
+<td align="right">0.05 (0.01)</td>
+<td align="right">1.05 (1.02, 1.08)</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Sex</td>
+<td align="right"></td>
+<td align="right">-</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Female (ref)</td>
+<td align="right">-</td>
+<td align="right">-</td>
+<td align="right">-</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Male</td>
+<td align="right">0.11 (0.18)</td>
+<td align="right">1.12 (0.79, 1.58)</td>
+<td align="right">0.54</td>
+</tr>
+<tr class="odd">
+<td align="left">Race</td>
+<td align="right"></td>
+<td align="right">-</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>White (ref)</td>
+<td align="right">-</td>
+<td align="right">-</td>
+<td align="right">-</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Black</td>
+<td align="right">-0.98 (0.22)</td>
+<td align="right">0.38 (0.24, 0.58)</td>
+<td align="right">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Mexican American</td>
+<td align="right">0.07 (0.26)</td>
+<td align="right">1.07 (0.64, 1.78)</td>
+<td align="right">0.80</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Other</td>
+<td align="right">-0.08 (0.22)</td>
+<td align="right">0.92 (0.59, 1.43)</td>
+<td align="right">0.71</td>
+</tr>
+<tr class="even">
+<td align="left">Group</td>
+<td align="right"></td>
+<td align="right">-</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Control (ref)</td>
+<td align="right">-</td>
+<td align="right">-</td>
+<td align="right">-</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hskip .4cm\)</span>Treatment</td>
+<td align="right">0.13 (0.18)</td>
+<td align="right">1.14 (0.80, 1.61)</td>
+<td align="right">0.48</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="closing-comments" class="section level2">
+<h2>Closing comments</h2>
+<ul>
+<li>I suggest <strong>printr</strong> with <code>kable</code> for alignment, captions, etc.</li>
+<li>Working on functions for complex survey data.</li>
+<li>Feel free to collaborate on <a href="https://github.com/vandomed/tab">GitHub</a>!</li>
+</ul>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-xtable">
+<p>Dahl, David B. 2016. <em>Xtable: Export Tables to Latex or Html</em>. <a href="https://CRAN.R-project.org/package=xtable" class="uri">https://CRAN.R-project.org/package=xtable</a>.</p>
+</div>
+<div id="ref-pander">
+<p>Daróczi, Gergely, and Roman Tsegelskyi. 2017. <em>Pander: An R ’Pandoc’ Writer</em>. <a href="http://rapporter.github.io/pander" class="uri">http://rapporter.github.io/pander</a>.</p>
+</div>
+<div id="ref-survival-book">
+<p>Terry M. Therneau, and Patricia M. Grambsch. 2000. <em>Modeling Survival Data: Extending the Cox Model</em>. New York: Springer.</p>
+</div>
+<div id="ref-survival-package">
+<p>Therneau, Terry M. 2015. <em>A Package for Survival Analysis in S</em>. <a href="https://CRAN.R-project.org/package=survival" class="uri">https://CRAN.R-project.org/package=survival</a>.</p>
+</div>
+<div id="ref-knitr3">
+<p>Xie, Yihui. 2014. “Knitr: A Comprehensive Tool for Reproducible Research in R.” In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595" class="uri">http://www.crcpress.com/product/isbn/9781466561595</a>.</p>
+</div>
+<div id="ref-knitr2">
+<p>———. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://yihui.name/knitr/" class="uri">https://yihui.name/knitr/</a>.</p>
+</div>
+<div id="ref-printr">
+<p>———. 2017. <em>Printr: Automatically Print R Objects to Appropriate Formats According to the ’Knitr’ Output Format</em>. <a href="https://CRAN.R-project.org/package=printr" class="uri">https://CRAN.R-project.org/package=printr</a>.</p>
+</div>
+<div id="ref-knitr1">
+<p>———. 2018. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.name/knitr/" class="uri">https://yihui.name/knitr/</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
