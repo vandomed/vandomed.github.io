@@ -19,6 +19,7 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 ## Blogs
 
+* 03/06/18 [Get Rich with 'stocks'](https://vandomed.github.io/stocks.html) <br>
 * 02/19/18 [Summary Tables with 'tab'](https://vandomed.github.io/tab.html) <br>
 * 02/03/18 [Create R Package in 5 Minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
 * 09/11/17 [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
