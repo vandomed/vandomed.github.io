@@ -52,9 +52,9 @@ num_vig_bouts	       | 2+	     | Number of vigorous bouts.
 mvpa_bouted	         | 2+	     | MVPA minutes accumulated in bouts of length >= active_bout_length.
 vig_bouted	         | 2+	     | Vigorous intensity minutes accumulated in bouts of length >= active_bout_length
 guideline_min	       | 2+	     | Minutes towards physical activity guidelines (150 min/wk of MVPA or 75 min/wk of VPA).
-hourly_var\_hour1	 | 3	     | Value of hourly_var variable during hour 1 (midnight to 1 AM).
-hourly_var\_hour2	 | 3	     | Value of hourly_var variable during hour 2.
-<hourly_var>\_hour3	 | 3	     | Value of hourly_var variable during hour 3.
+hourly_var_hour1	   | 3	     | Value of hourly_var variable during hour 1 (midnight to 1 AM).
+hourly_var_hour2	   | 3	     | Value of hourly_var variable during hour 2.
+hourly_var_hour3	   | 3	     | Value of hourly_var variable during hour 3.
 <hourly_var>\_hour4	 | 3	     | Value of hourly_var variable during hour 4.
 <hourly_var>\_hour5	 | 3	     | Value of hourly_var variable during hour 5.
 <hourly_var>\_hour6	 | 3	     | Value of hourly_var variable during hour 6.
