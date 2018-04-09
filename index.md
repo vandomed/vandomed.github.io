@@ -19,6 +19,7 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 ## Blogs, vignettes, presentations, etc.
 
+* 04/09/18 [Data analysis in R](https://vandomed.github.io/data_analysis_2018.pdf) <br>
 * 03/11/18 [Accelerometry: A better method, a new set of problems](https://sites.duke.edu/diss2017/files/2017/09/S3B_dane_slides.pdf) <br>
 * 03/06/18 [Get Rich with 'stocks'](https://vandomed.github.io/stocks.html) <br>
 * 02/19/18 [Summary Tables with 'tab'](https://vandomed.github.io/tab.html) <br>
