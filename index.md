@@ -1,13 +1,15 @@
 ## R packages
 
-Currently, all are on R-Forge and some are on CRAN. Currently migrating from R-Forge to GitHub. [Here is my GitHub page](https://github.com/vandomed).
+All packages are on GitHub and some are on CRAN. [Here is my GitHub page](https://github.com/vandomed).
 
 * [accelerometry](https://cran.r-project.org/web/packages/accelerometry/index.html) <br>
-* [nhanesaccel](http://r-forge.r-project.org/R/?group_id=1733) <br>
-* [nhanesdata](https://r-forge.r-project.org/projects/nhanesdata/) <br>
+* [crowdopt](https://github.com/vandomed/crowdopt) <br>
+* [dvmisc](https://cran.r-project.org/web/packages/dvmisc/index.html) <br>
+* [nhanesaccel](https://github.com/vandomed/nhanesaccel) <br>
+* [nhanesdata](https://github.com/vandomed/nhanesdata) <br>
+* [pooling](https://cran.r-project.org/web/packages/pooling/index.html) <br>
 * [tab](https://cran.r-project.org/web/packages/tab/index.html) <br>
 * [stocks](https://cran.r-project.org/web/packages/stocks/index.html) <br>
-* [dvmisc](https://cran.r-project.org/web/packages/dvmisc/index.html) <br>
 
 ## Stock market analysis
 
@@ -21,7 +23,7 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 * 04/09/18 [Data analysis in R](https://vandomed.github.io/analysis_lecture_2018.pdf) <br>
 * 03/11/18 [Accelerometry: A better method, a new set of problems](https://sites.duke.edu/diss2017/files/2017/09/S3B_dane_slides.pdf) <br>
-* 03/06/18 [Get Rich with 'stocks'](https://vandomed.github.io/stocks.html) <br>
-* 02/19/18 [Summary Tables with 'tab'](https://vandomed.github.io/tab.html) <br>
-* 02/03/18 [Create R Package in 5 Minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
+* 03/06/18 [Get rich with 'stocks'](https://vandomed.github.io/stocks.html) <br>
+* 02/19/18 [Summary tables with 'tab'](https://vandomed.github.io/tab.html) <br>
+* 02/03/18 [Create R package in 5 minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
 * 09/11/17 [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
