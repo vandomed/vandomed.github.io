@@ -1,4 +1,4 @@
-# Sep. 30, 2018
+# Oct. 10, 2018
 # Dane Van Domelen
 # R code for manuscript
 # "From self-report to wearables: measurement error lives on"
@@ -38,12 +38,14 @@ names(perperson) <- toupper(names(perperson))
 df <- perperson %>% 
   left_join(demo_cd) %>% 
   left_join(bmx_cd) %>% 
-  left_join(hdl_cd) %>%
+  left_join(hdl_cd) %>% 
   dplyr::select(
     SEQN, SDDSRVYR, RIAGENDR, RIDAGEYR, RIDRETH1, SDMVPSU, SDMVSTRA, 
-    WTMEC4YR_ADJ, INCLUDE, VALID_DAYS, VALID_MIN, COUNTS, CPM, STEPS, SED_MIN, 
-    SED_PERCENT, MVPA_MIN, MVPA_PERCENT, VIG_MIN, VIG_PERCENT, MAX_1MIN_COUNTS, 
-    MAX_10MIN_COUNTS, BMXBMI, BMXWAIST, RIDEXPRG, LBXHDD
+    WTMEC4YR_ADJ, INCLUDE, VALID_DAYS, VALID_MIN, MVPA_MIN, 
+    COUNTS, CPM, SED_MIN, LIGHT_MIN, LIFE_MIN, MOD_MIN, VIG_MIN, 
+    MAX_1MIN_COUNTS, MAX_5MIN_COUNTS, MAX_30MIN_COUNTS, SED_BREAKS, 
+    SED_BOUTED_30MIN, GUIDELINE_MIN, 
+    BMXBMI, BMXWAIST, RIDEXPRG, LBXHDD
   ) %>%
   dplyr::mutate(
     RACE = dplyr::recode_factor(RIDRETH1, `3` = "NH White", `4` = "NH Black", 
@@ -54,14 +56,28 @@ df <- perperson %>%
     INCLUDE7 = ifelse(INCLUDE1 == 1 & VALID_DAYS == 7, 1, 0)
   )
 
-# Look at distribution of HDL
-hist(df$LBXHDD[df$RIAGENDR == 1 & df$RIDAGEYR %in% 20:39])
-hist(df$LBXHDD[df$RIAGENDR == 2 & df$RIDAGEYR %in% 20:39])
+# Look at distribution of HDL and log(HDL)
+p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = LBXHDD)) +
+  geom_histogram(color = "black", fill = "white") + 
+  labs(title = "HDL by Sex in NHANES 03-06 (age 20-39)") + 
+  facet_grid(RIAGENDR ~ .) + 
+  theme_bw()
+p
+
+p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = log(LBXHDD))) +
+  geom_histogram(color = "black", fill = "white") + 
+  labs(title = "log(HDL) by Sex in NHANES 03-06 (age 20-39)") + 
+  facet_grid(RIAGENDR ~ .) + 
+  theme_bw()
+p
 
 # Compare HDL in 2003-2004 vs. 2005-2006 waves
-par(mfrow = c(2, 1))
-hist(df$LBXHDD[df$SDDSRVYR == 3 & df$RIDAGEYR %in% 20:39], xlim = c(0, 150))
-hist(df$LBXHDD[df$SDDSRVYR == 4 & df$RIDAGEYR %in% 20:39], xlim = c(0, 150))
+p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = LBXHDD)) +
+  geom_histogram(color = "black", fill = "white") + 
+  labs(title = "log(HDL) by Sex in NHANES 03-06 (age 20-39)") + 
+  facet_grid(SDDSRVYR ~ .) + 
+  theme_bw()
+p
 
 
 # Estimate associations for MVPA and HDL ----------------------------------
@@ -85,6 +101,7 @@ f.fit <- function(sex, days) {
   list(n = nrow(dsub), bhat = fit$coef[2], lower = ci[1], upper = ci[2])
 }
 betas <- f.fit %>% iterate(sex = 1: 2, days = 1: 7)
+betas$sex <- factor(betas$sex, levels = c(1, 2), labels = c("Males", "Females")) 
 
 # Create Figure 1
 p <- ggplot(betas, aes(x = days, y = bhat)) + 
@@ -94,11 +111,11 @@ p <- ggplot(betas, aes(x = days, y = bhat)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) + 
   facet_grid(. ~ sex) + 
   labs(title = "Estimated Association for MVPA and HDL", 
-       y = expression(paste(hat(beta), " (95% CI)", sep = ""))) + 
+       y = expression(paste(hat(beta), " (95% confidence interval)", sep = ""))) + 
   theme_bw(base_size = 15) + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.title.x = element_text(vjust = -1)) + 
-  scale_x_discrete("Minimum no. of valid days (sample size)", 
+  scale_x_discrete("Minimum number of valid days (sample size)", 
                    limits = 1: 7) + 
   geom_text(aes(y = -0.028, label = paste("(", n, ")", sep = "")), 
             size = 4, angle = 0)
@@ -147,8 +164,10 @@ f.resampling <- function(sex, days) {
 }
 
 # Run 500 trials for each scenario - takes roughly 30 minutes
+set.seed(123)
 betas <- f.resampling %>% iterate(sex = 1: 2, days = 1: 7, trials = 500)
 
+# Create Figure 2
 # Create Figure 2
 df2 <- betas %>% 
   group_by(sex, days) %>% 
@@ -161,22 +180,22 @@ attens <- paste(
 )
 p <- ggplot(df2, aes(x = days, y = mbhat)) + 
   geom_point() + 
-  ylim(-0.025, 0.4) + 
+  ylim(-0.03, 0.365) +
   geom_hline(yintercept = 0, lty = 2) + 
   geom_errorbar(aes(ymin = mlower, ymax = mupper), width = 0.2) + 
   facet_grid(. ~ sex) + 
   labs(title = "Estimated Association for MVPA and HDL", 
-       y = expression(paste("Median ", hat(beta), " (95% CI)", sep = ""))) + 
+       y = expression(paste("Median ", hat(beta), " (95% confidence interval)", sep = ""))) + 
   theme_bw(base_size = 15) + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.title.x = element_text(vjust = -1)) + 
-  scale_x_discrete("Minimum no. of valid days", 
+  scale_x_discrete("Minimum number of valid days", 
                    limits = 1: 7) + 
-  geom_text(aes(y = -0.025, label = attens), size = 4, angle = 0)
+  geom_text(aes(y = -0.028, label = attens), size = 4, angle = 0)
 p
 
 
-# Resampling experiment with multiple PA variables -------------------------
+# Resampling experiment with various PA variables -------------------------
 
 # Separate perday into lists according to SEQN
 vars <- c("counts", "cpm", "sed_min", "light_min", "life_min", "mod_min", 
@@ -214,7 +233,7 @@ f.resampling <- function(sex, days) {
   
   # Regress HDL on various PA variables and record estimates
   betas <- c()
-  for (ii in 1: length(variables)) {
+  for (ii in 1: length(vars)) {
     formula <- paste("LBXHDD ~ ", vars[ii], " + valid_min + RIDAGEYR + RACE", sep = "")
     fit <- svyglm(
       formula = formula, 
@@ -227,8 +246,9 @@ f.resampling <- function(sex, days) {
   
 }
 
-# Run 250 trials for each scenario - takes roughly 1 hour
-betas <- f.resampling %>% iterate(sex = 1: 2, days = 1: 7, trials = 250)
+# Run 500 trials for each scenario - takes roughly 2 hours
+set.seed(456)
+betas <- f.resampling %>% iterate(sex = 1: 2, days = 1: 7, trials = 500)
 
 # Go from wide to long format for ggplot, and add labels for sex
 betas <- gather(data = betas, key = "var", value = "bhat", 
@@ -247,10 +267,6 @@ df2 <- betas %>%
   group_by(days, sex, var) %>% 
   dplyr::summarise(mbhat = median(bhat))
 df2$atten <- (1 - df2$mbhat / sevens) * 100
-df2$atten[df2$atten < -100] <- -100
-df2$atten[df2$atten > 100] <- 100
-df2
-subset(df2, atten < 0)
 
 # Create Figure 3
 varlabs <- c("Counts", "Counts/min.", "Sed. time", "Light time", "Lifestyle time", 
