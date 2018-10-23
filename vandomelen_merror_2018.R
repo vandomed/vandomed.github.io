@@ -1,4 +1,4 @@
-# Oct. 16, 2018
+# Oct. 23, 2018
 # Dane Van Domelen
 # R code for manuscript
 # "From self-report to wearables: measurement error lives on"
