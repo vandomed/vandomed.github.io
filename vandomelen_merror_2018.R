@@ -1,4 +1,4 @@
-# Oct. 10, 2018
+# Oct. 16, 2018
 # Dane Van Domelen
 # R code for manuscript
 # "From self-report to wearables: measurement error lives on"
@@ -33,6 +33,7 @@ perday <- pa[[2]]
 demo_cd <- full_join(demo_c, demo_d)
 bmx_cd <- full_join(bmx_c, bmx_d)
 hdl_cd <- full_join(l13_c, hdl_d, by = c("LBXHDD" = "LBDHDD", "SEQN", "LBDHDDSI"))
+crp_cd <- full_join(l11_c, crp_d)
 
 names(perperson) <- toupper(names(perperson))
 df <- perperson %>% 
@@ -45,13 +46,13 @@ df <- perperson %>%
     COUNTS, CPM, SED_MIN, LIGHT_MIN, LIFE_MIN, MOD_MIN, VIG_MIN, 
     MAX_1MIN_COUNTS, MAX_5MIN_COUNTS, MAX_30MIN_COUNTS, SED_BREAKS, 
     SED_BOUTED_30MIN, GUIDELINE_MIN, 
-    BMXBMI, BMXWAIST, RIDEXPRG, LBXHDD
+    BMXBMI, BMXWAIST, RIDEXPRG, LBXHDD, LBXCRP
   ) %>%
   dplyr::mutate(
+    LOGCRP = log(LBXCRP + 0.02),
     RACE = dplyr::recode_factor(RIDRETH1, `3` = "NH White", `4` = "NH Black", 
                                 `1` = "Mexican American", `2` = "Other", `5` = "Other"), 
-    INCLUDE1 = ifelse(INCLUDE == 1 & RIDAGEYR %in% 20: 39 & ! is.na(LBXHDD) &
-                        ! is.na(RACE) & 
+    INCLUDE1 = ifelse(INCLUDE == 1 & RIDAGEYR %in% 20: 39 & ! is.na(RACE) & 
                         (RIAGENDR == 1 | (RIAGENDR == 2 & RIDEXPRG == 2)), 1, 0), 
     INCLUDE7 = ifelse(INCLUDE1 == 1 & VALID_DAYS == 7, 1, 0)
   )
@@ -71,8 +72,31 @@ p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = log(LBXHDD))) +
   theme_bw()
 p
 
+# Look at distribution of CRP and log(CRP)
+p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = LBXCRP)) +
+  geom_histogram(color = "black", fill = "white") + 
+  labs(title = "CRP by Sex in NHANES 03-06 (age 20-39)") + 
+  facet_grid(RIAGENDR ~ .) + 
+  theme_bw()
+p
+
+p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = LOGCRP)) +
+  geom_histogram(color = "black", fill = "white") + 
+  labs(title = "log(CRP) by Sex in NHANES 03-06 (age 20-39)") + 
+  facet_grid(RIAGENDR ~ .) + 
+  theme_bw()
+p
+
 # Compare HDL in 2003-2004 vs. 2005-2006 waves
 p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = LBXHDD)) +
+  geom_histogram(color = "black", fill = "white") + 
+  labs(title = "log(HDL) by Sex in NHANES 03-06 (age 20-39)") + 
+  facet_grid(SDDSRVYR ~ .) + 
+  theme_bw()
+p
+
+# Compare log(CRP) in 2003-2004 vs. 2005-2006 waves
+p <- ggplot(subset(df, RIDAGEYR %in% 20: 39), aes(x = LOGCRP)) +
   geom_histogram(color = "black", fill = "white") + 
   labs(title = "log(HDL) by Sex in NHANES 03-06 (age 20-39)") + 
   facet_grid(SDDSRVYR ~ .) + 
@@ -106,7 +130,7 @@ betas$sex <- factor(betas$sex, levels = c(1, 2), labels = c("Males", "Females"))
 # Create Figure 1
 p <- ggplot(betas, aes(x = days, y = bhat)) + 
   geom_point() + 
-  ylim(-0.03, 0.365) +
+  ylim(-0.035, 0.365) +
   geom_hline(yintercept = 0, lty = 2) + 
   geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) + 
   facet_grid(. ~ sex) + 
@@ -117,7 +141,7 @@ p <- ggplot(betas, aes(x = days, y = bhat)) +
         axis.title.x = element_text(vjust = -1)) + 
   scale_x_discrete("Minimum number of valid days (sample size)", 
                    limits = 1: 7) + 
-  geom_text(aes(y = -0.028, label = paste("(", n, ")", sep = "")), 
+  geom_text(aes(y = -0.034, label = paste("(", n, ")", sep = "")), 
             size = 4, angle = 0)
 p
 
@@ -163,11 +187,11 @@ f.resampling <- function(sex, days) {
   
 }
 
-# Run 500 trials for each scenario - takes roughly 30 minutes
+# Run 1,000 trials for each scenario (takes roughly 1 hour)
 set.seed(123)
-betas <- f.resampling %>% iterate(sex = 1: 2, days = 1: 7, trials = 500)
+betas <- f.resampling %>% iterate(sex = 1: 2, days = 1: 7, trials = 1000)
+betas$sex <- factor(betas$sex, levels = c(1, 2), labels = c("Males", "Females"))
 
-# Create Figure 2
 # Create Figure 2
 df2 <- betas %>% 
   group_by(sex, days) %>% 
@@ -180,7 +204,7 @@ attens <- paste(
 )
 p <- ggplot(df2, aes(x = days, y = mbhat)) + 
   geom_point() + 
-  ylim(-0.03, 0.365) +
+  ylim(-0.035, 0.365) +
   geom_hline(yintercept = 0, lty = 2) + 
   geom_errorbar(aes(ymin = mlower, ymax = mupper), width = 0.2) + 
   facet_grid(. ~ sex) + 
@@ -191,7 +215,7 @@ p <- ggplot(df2, aes(x = days, y = mbhat)) +
         axis.title.x = element_text(vjust = -1)) + 
   scale_x_discrete("Minimum number of valid days", 
                    limits = 1: 7) + 
-  geom_text(aes(y = -0.028, label = attens), size = 4, angle = 0)
+  geom_text(aes(y = -0.034, label = attens), size = 4, angle = 0)
 p
 
 
@@ -199,7 +223,7 @@ p
 
 # Separate perday into lists according to SEQN
 vars <- c("counts", "cpm", "sed_min", "light_min", "life_min", "mod_min", 
-          "vig_min", "max_1min_counts", "max_50min_counts", 
+          "vig_min", "max_1min_counts", "max_5min_counts", 
           "max_30min_counts", "sed_breaks", "sed_bouted_30min", 
           "guideline_min")
 perday.list <- base::split(
@@ -231,44 +255,70 @@ f.resampling <- function(sex, days) {
     design, INCLUDE7 == 1 & RIAGENDR == sex
   )
   
-  # Regress HDL on various PA variables and record estimates
-  betas <- c()
+  # Regress HDL and log(CRP) on various PA variables and record estimates
+  hdl.betas <- c()
+  logcrp.betas <- c()
   for (ii in 1: length(vars)) {
+    
     formula <- paste("LBXHDD ~ ", vars[ii], " + valid_min + RIDAGEYR + RACE", sep = "")
     fit <- svyglm(
       formula = formula, 
       design = dsub
     )
-    betas[ii] <- fit$coef[2]
+    hdl.betas[ii] <- fit$coef[2]
+    
+    formula <- paste("LOGCRP ~ ", vars[ii], " + valid_min + RIDAGEYR + RACE", sep = "")
+    fit <- svyglm(
+      formula = formula, 
+      design = dsub
+    )
+    logcrp.betas[ii] <- fit$coef[2]
+    
   }
-  names(betas) <- vars
-  return(betas)
+  names(hdl.betas) <- names(logcrp.betas) <- vars
+  return(c(hdl.betas, logcrp.betas))
   
 }
 
-# Run 500 trials for each scenario - takes roughly 2 hours
-set.seed(456)
-betas <- f.resampling %>% iterate(sex = 1: 2, days = 1: 7, trials = 500)
-
-# Go from wide to long format for ggplot, and add labels for sex
-betas <- gather(data = betas, key = "var", value = "bhat", 
-                vars, factor_key = TRUE)
+# Run 1,000 trials for each scenario (takes roughly 4 hours)
+set.seed(1234)
+betas <- f.resampling %>% iterate(sex = 1: 2, days = 1: 7, trials = 1000)
 betas$sex <- factor(betas$sex, levels = c(1, 2), labels = c("Males", "Females"))
 
-# Calculate percent attenuation for each variable and each number of days
-sevens <- betas %>% 
+# Go from wide to long format for ggplot
+betas.hdl <- betas[, c(1, 2, 3: 15)] %>% 
+  gather(key = "var", value = "bhat", vars, factor_key = TRUE)
+betas.logcrp <- betas[, c(1, 2, 16: 28)] %>% 
+  gather(key = "var", value = "bhat", vars, factor_key = TRUE)
+
+sevens.hdl <- betas.hdl %>% 
   dplyr::filter(days == 7) %>%
   dplyr::group_by(sex, var) %>%
   dplyr::filter(row_number() == 1) %>% 
   dplyr::arrange(sex)
-sevens <- sevens$bhat
+sevens.hdl <- sevens.hdl$bhat
 
-df2 <- betas %>% 
+sevens.logcrp <- betas.logcrp %>% 
+  dplyr::filter(days == 7) %>%
+  dplyr::group_by(sex, var) %>%
+  dplyr::filter(row_number() == 1) %>% 
+  dplyr::arrange(sex)
+sevens.logcrp <- sevens.logcrp$bhat
+
+# Calculation percent attenuation
+df2.hdl <- betas.hdl %>% 
   group_by(days, sex, var) %>% 
   dplyr::summarise(mbhat = median(bhat))
-df2$atten <- (1 - df2$mbhat / sevens) * 100
+df2.hdl$atten <- (1 - df2.hdl$mbhat / sevens.hdl) * 100
+
+df2.logcrp <- betas.logcrp %>% 
+  group_by(days, sex, var) %>% 
+  dplyr::summarise(mbhat = median(bhat))
+df2.logcrp$atten <- (1 - df2.logcrp$mbhat / sevens.logcrp) * 100
 
 # Create Figure 3
+df2 <- rbind(df2.hdl, df2.logcrp)
+df2$outcome <- c(rep("HDL", nrow(df2) / 2), rep("log(CRP)", nrow(df2) / 2))
 varlabs <- c("Counts", "Counts/min.", "Sed. time", "Light time", "Lifestyle time", 
              "Moderate time", "Vigorous time", "Max 1-min counts", "Max 5-min counts", 
              "Max 30-min counts", "Sed. breaks", 
@@ -277,14 +327,11 @@ p <- ggplot(df2, aes(days, var)) +
   geom_tile(aes(fill = atten), colour = "white") + 
   scale_fill_gradientn(colors = c("blue", "white", "red"), 
                        limits = c(-100, 100)) + 
-  facet_grid(. ~ sex) + 
+  facet_grid(outcome ~ sex) + 
   labs(title = "Percent Attenuation Heat Map", 
        x = "Days sampled", y = "") + 
-  theme_bw(base_size = 14) + 
+  theme_bw(base_size = 15) + 
   scale_x_discrete(limits = 1: 7, expand = c(0.001, 0.001)) + 
   scale_y_discrete(labels = varlabs) + 
   theme(legend.title=element_blank(), axis.title.y = element_blank()) 
 p
-
-# Print out attenuations
-as.data.frame(df2 %>% dplyr::group_by(sex, var, days) %>% dplyr::summarise(mean(atten)))
