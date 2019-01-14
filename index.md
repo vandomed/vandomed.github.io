@@ -21,7 +21,7 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 ## Blogs, vignettes, presentations, etc.
 
-* 01/14/19 [Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app_1_14_19.html) <br>
+* 01/14/19 [Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app.html) <br>
 * 09/28/18 [A slightly modified purrr::pmap for iterations and simulations](https://vandomed.github.io/iterate_9_29_18.html) <br>
 * 04/09/18 [Data analysis in R](https://vandomed.github.io/analysis_lecture_2018.pdf) <br>
 * 03/11/18 [Accelerometry: A better method, a new set of problems](https://sites.duke.edu/diss2017/files/2017/09/S3B_dane_slides.pdf) <br>
