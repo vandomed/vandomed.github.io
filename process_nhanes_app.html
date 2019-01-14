@@ -128,16 +128,15 @@ $(document).ready(function () {
 
 <div id="background-skippable" class="section level3">
 <h3>Background (skippable)</h3>
-<p>Although it was released over 10 years ago, the accelerometer data from NHANES 2003-2004 and 2005-2006 is likely still the richest existing dataset with objectively measured physical activity in a representative sample of Americans. There is still plenty that could be done with these data. Plus, mortality data is still coming in, and might keep coming in for the next 75+ years! So the dataset remains highly relevant.</p>
-<p>Upon initial release, the National Cancer Institute provided SAS files with the raw minute-to-minute accelerometer data, along with SAS scripts for processing the data (<a href="https://epi.grants.cancer.gov/nhanes_pam/" class="uri">https://epi.grants.cancer.gov/nhanes_pam/</a>). The NCI deserves a lot of credit for publishing these scripts. However, they have some limitations:</p>
+<p>Though released ~10 years ago, NHANES 2003-2006 is likely still the richest dataset with accelerometer-measured physical activity on a representative sample of Americans. There is still plenty that can be done with these data, and there will additional opportunities as more mortality data rolls in—and it may roll in for another 75+ years!</p>
+<p>Upon initial release, the NCI provided SAS files with the raw minute-to-minute accelerometer data, along with SAS scripts for processing the data (<a href="https://epi.grants.cancer.gov/nhanes_pam/" class="uri">https://epi.grants.cancer.gov/nhanes_pam/</a>). The NCI deserves a lot of credit for publishing these scripts. However, they have some limitations:</p>
 <ul>
 <li>Users have to download 3.87 GB data files to their computer.</li>
 <li>Users must have a SAS license.</li>
 <li>The scripts only calculate a few basic physical activity variables.</li>
-<li>The SAS scripts are slow (e.g. 25 minutes to process just the 2003-2004 data!).</li>
+<li>The SAS scripts are slow (e.g. ~25 minutes to process just the 2003-2004 data).</li>
 </ul>
-<p>As a result, many research groups wrote their own scripts to process the data according to their own preferences. I did this for a while, and then decided to write an R package to share my functions with other researchers.</p>
-<p>Briefly, I developed the R package <strong>accelerometry</strong> <span class="citation">(D. R. Van Domelen 2018)</span> to provide general-purpose functions for various steps: removing non-wear time, identifying activity bouts, and so forth. I used C++ via the <strong>Rcpp</strong> package <span class="citation">(Eddelbuettel and Francois 2018, <span class="citation">Eddelbuettel and François (2011)</span>, <span class="citation">Eddelbuettel (2013)</span>, <span class="citation">Eddelbuettel and Balamuta (2017)</span>)</span> to make the functions fast. Then, I developed <strong>nhanesaccel</strong> to process the NHANES data specifically. Its main function, <em>process_nhanes</em>, which has many arguments that users can specify to process the data according to their own personal preferences. More details on the implementation are available <span class="citation">(D. Van Domelen and Pittard 2014)</span>.</p>
+<p>As a result, many research groups wrote their own scripts to process the data according to their own preferences. I did this for a while, and then decided to create R packages to share my functions with other researchers. I developed <strong>accelerometry</strong> <span class="citation">(Van Domelen 2018)</span> and <strong>nhanesaccel</strong> <span class="citation">(Van Domelen, Pittard, and Harris 2018)</span>; the latter has a function called <em>process_nhanes</em> which users can call to process the data with customizable settings.</p>
 </div>
 <div id="the-app" class="section level2">
 <h2>The app</h2>
@@ -170,25 +169,13 @@ $(document).ready(function () {
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-shiny">
-<p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2018. <em>Shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a>.</p>
-</div>
-<div id="ref-Rcpp3">
-<p>Eddelbuettel, Dirk. 2013. <em>Seamless R and C++ Integration with Rcpp</em>. New York: Springer. doi:<a href="https://doi.org/10.1007/978-1-4614-6868-4">10.1007/978-1-4614-6868-4</a>.</p>
-</div>
-<div id="ref-Rcpp4">
-<p>Eddelbuettel, Dirk, and James Joseph Balamuta. 2017. “Extending R with C++: A Brief Introduction to Rcpp.” <em>PeerJ Preprints</em> 5 (August): e3188v1. doi:<a href="https://doi.org/10.7287/peerj.preprints.3188v1">10.7287/peerj.preprints.3188v1</a>.</p>
-</div>
-<div id="ref-Rcpp1">
-<p>Eddelbuettel, Dirk, and Romain Francois. 2018. <em>Rcpp: R / C++ Interface</em>.</p>
-</div>
-<div id="ref-Rcpp2">
-<p>Eddelbuettel, Dirk, and Romain François. 2011. “Rcpp: Seamless R and C++ Integration.” <em>Journal of Statistical Software</em> 40 (8): 1–18. doi:<a href="https://doi.org/10.18637/jss.v040.i08">10.18637/jss.v040.i08</a>.</p>
+<p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2018. <em>shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a>.</p>
 </div>
 <div id="ref-accelerometry">
-<p>Van Domelen, Dane R. 2018. <em>Accelerometry: Functions for Processing Accelerometer Data</em>.</p>
+<p>Van Domelen, Dane R. 2018. <em>accelerometry: Functions for Processing Accelerometer Data</em>.</p>
 </div>
-<div id="ref-rjournal">
-<p>Van Domelen, Dane, and W. Stephen Pittard. 2014. “Flexible R Functions for Processing Accelerometer Data, with Emphasis on Nhanes 2003-2006.” <em>The R Journal</em> 6 (2). <a href="https://journal.r-project.org/archive/2014/RJ-2014-024/RJ-2014-024.pdf" class="uri">https://journal.r-project.org/archive/2014/RJ-2014-024/RJ-2014-024.pdf</a>.</p>
+<div id="ref-nhanesaccel">
+<p>Van Domelen, Dane R., W. Stephen Pittard, and Tamara B. Harris. 2018. <em>nhanesaccel: Process Accelerometer Data from NHANES 2003-2006</em>.</p>
 </div>
 </div>
 </div>
