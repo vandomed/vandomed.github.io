@@ -19,10 +19,17 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 [Last updated Jan. 11, 2019](https://vandomed.github.io/dane_vandomelen_1_11_19.html)
 
+## Presentations etc.
+
+Date | Type | Title and link
+--- | --- | ---
+01/29/19 | Talk | [Some statistical issues in modeling frailty](vandomed.github.io/eba_1_28_19.pdf)
+01/14/19 | Blog | [Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app.html)
+
 ## Blogs, R package vignettes, presentations, etc.
 
 * 01/29/19 [Talk: Some statistical issues in modeling frailty](vandomed.github.io/eba_1_28_19.pdf) 
-* 01/14/19 [Blog: Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app.html) <br>
+* 01/14/19 [Blog: Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app.html)
 * 09/28/18 [Blog: A slightly modified purrr::pmap for iterations and simulations](https://vandomed.github.io/iterate_9_29_18.html) <br>
 * 04/09/18 [Lecture: Data analysis in R](https://vandomed.github.io/analysis_lecture_2018.pdf) <br>
 * 03/11/18 [Talk: Accelerometry: A better method, a new set of problems](https://sites.duke.edu/diss2017/files/2017/09/S3B_dane_slides.pdf) <br>
