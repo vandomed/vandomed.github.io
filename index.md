@@ -19,13 +19,14 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 [Last updated Jan. 11, 2019](https://vandomed.github.io/dane_vandomelen_1_11_19.html)
 
-## Blogs, vignettes, presentations, etc.
+## Blogs, R package vignettes, presentations, etc.
 
-* 01/14/19 [Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app.html) <br>
-* 09/28/18 [A slightly modified purrr::pmap for iterations and simulations](https://vandomed.github.io/iterate_9_29_18.html) <br>
-* 04/09/18 [Data analysis in R](https://vandomed.github.io/analysis_lecture_2018.pdf) <br>
-* 03/11/18 [Accelerometry: A better method, a new set of problems](https://sites.duke.edu/diss2017/files/2017/09/S3B_dane_slides.pdf) <br>
-* 03/06/18 [Get rich with 'stocks'](https://vandomed.github.io/stocks.html) <br>
-* 02/19/18 [Summary tables with 'tab'](https://vandomed.github.io/tab.html) <br>
-* 02/03/18 [Create R package in 5 minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
-* 09/11/17 [Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
+* 01/29/19 [Talk: Some statistical issues in modeling frailty](vandomed.github.io/eba_1_28_19.pdf) 
+* 01/14/19 [Blog: Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app.html) <br>
+* 09/28/18 [Blog: A slightly modified purrr::pmap for iterations and simulations](https://vandomed.github.io/iterate_9_29_18.html) <br>
+* 04/09/18 [Lecture: Data analysis in R](https://vandomed.github.io/analysis_lecture_2018.pdf) <br>
+* 03/11/18 [Talk: Accelerometry: A better method, a new set of problems](https://sites.duke.edu/diss2017/files/2017/09/S3B_dane_slides.pdf) <br>
+* 03/06/18 [Vignette: Get rich with 'stocks'](https://vandomed.github.io/stocks.html) <br>
+* 02/19/18 [Vignette: Summary tables with 'tab'](https://vandomed.github.io/tab.html) <br>
+* 02/03/18 [Blog: Create R package in 5 minutes with roxygen2](https://vandomed.github.io/build_rpackage.html) <br>
+* 09/11/17 [Blog: Which moving average function in R is fastest?](https://vandomed.github.io/moving_averages.html)
