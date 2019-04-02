@@ -17,12 +17,14 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 ## CV
 
-[Last updated March 12, 2019](https://vandomed.github.io/dane_vandomelen_3_12_19.html)
+[Last updated April 2, 2019](https://vandomed.github.io/dane_vandomelen_4_2_19.html)
 
 ## Presentations etc.
 
 Date     | Type     | Title and link
 ---      | :---     | ---
+03/23/19 | Blog     | [Crowdsourced neighborhood and city security -- a simple idea that could work](https://medium.com/@vandomed/crowdsourced-neighborhood-and-city-security-a-simple-idea-that-could-work-84957edb69da)
+03/21/19 | Blog     | ["City Health" in San Antonio: a Case Study of Ideology Veiled as Science](https://medium.com/@vandomed/city-health-in-san-antonio-a-case-study-of-ideology-veiled-as-science-878fd33ad462)
 03/16/19 | Blog     | [Should public health researchers be advocates?](vandomed.github.io/publichealth_advocates.html)
 01/29/19 | Talk     | [Some statistical issues in modeling frailty](vandomed.github.io/eba_1_28_19.pdf)
 01/14/19 | Blog     | [Web app for processing NHANES accelerometer data](vandomed.github.io/process_nhanes_app.html)
