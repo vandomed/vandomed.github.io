@@ -1,5 +1,5 @@
 ---
-title: Dane Van Domelen
+title: Personal website
 ---
 
 ## R packages
