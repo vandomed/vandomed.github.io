@@ -15,13 +15,13 @@ All packages are on GitHub and some are on CRAN. [Here is my GitHub page](https:
 * [tab](https://cran.r-project.org/web/packages/tab/index.html) <br>
 * [stocks](https://cran.r-project.org/web/packages/stocks/index.html) <br>
 
-## Stock market analysis
-
-I write articles on investment srategies for [Seeking Alpha](https://seekingalpha.com/). [Here are my articles](https://seekingalpha.com/author/dane-van-domelen/articles#articles).
-
 ## CV
 
 [Last updated April 15, 2019](https://vandomed.github.io/dane_vandomelen_4_15_19.html)
+
+## Stock market analysis
+
+I write articles on investment srategies for [Seeking Alpha](https://seekingalpha.com/). [Here are my articles](https://seekingalpha.com/author/dane-van-domelen/articles#articles).
 
 ## Presentations etc.
 
