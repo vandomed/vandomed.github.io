@@ -21,7 +21,7 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 ## CV
 
-[Last updated April 2, 2019](https://vandomed.github.io/dane_vandomelen_4_2_19.html)
+[Last updated April 15, 2019](https://vandomed.github.io/dane_vandomelen_4_15_19.html)
 
 ## Presentations etc.
 
