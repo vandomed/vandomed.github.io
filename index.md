@@ -27,7 +27,7 @@ I write articles on investment srategies for [Seeking Alpha](https://seekingalph
 
 Date     | Type     | Title and link
 ---      | :---     | ---
-04/18/19 | Talk     | [#nocrimezone](vandomed.github.io/wit_4_18_19.html)
+04/18/19 | Talk     | [#nocrimezone](vandomed.github.io/wit_nocrimezone_4_18_19.html)
 03/23/19 | Blog     | [Crowdsourced neighborhood and city security&mdash;a simple idea that could work](https://medium.com/@vandomed/crowdsourced-neighborhood-and-city-security-a-simple-idea-that-could-work-84957edb69da)
 03/21/19 | Blog     | ["City health" in San Antonio: a case study of ideology veiled as science](https://medium.com/@vandomed/city-health-in-san-antonio-a-case-study-of-ideology-veiled-as-science-878fd33ad462)
 03/16/19 | Blog     | [Should public health researchers be advocates?](vandomed.github.io/publichealth_advocates.html)
