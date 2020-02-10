@@ -17,7 +17,7 @@ All packages are on GitHub and some are on CRAN. [Here is my GitHub page](https:
 
 ## Academic CV
 
-[Last updated Nov. 2, 2019](https://vandomed.github.io/dane_vandomelen_11_2_19.html)
+[Last updated Feb. 9, 2020](https://vandomed.github.io/dane_vandomelen_2_9_20.html)
 
 ## Stock market analysis
 
